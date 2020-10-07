@@ -8,7 +8,6 @@ const dbconection = async() => {
     //usuario: usermean
     //password: mTa8zzkKciWEjiDG
 
-
     try {
         //Debemos utilizar la cadena de conexion que tenemos en mongocompass
         await mongoose.connect(process.env.DB_CNN, {
