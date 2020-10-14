@@ -14,18 +14,20 @@ app.use(cors());
 // use es una funcion midleware que siempres se va a ejecutar siempre para todas las lineas
 // que estan hacia abajo
 
+//Lectura y parseo del body
+app.use(express.json());
+
 // conexion a base de datos
 dbconection();
 //console.log(process.env);
 
 
 //rutas del API
-app.get('/', (req, res) => {
-    res.json({
-        ok: true,
-        msg: 'Hola mundo'
-    });
-});
+
+app.use('/api/usuarios', require('./routes/usuariosRoute'));
+app.use('/api/login', require('./routes/authRoute'));
+
+
 
 
 
