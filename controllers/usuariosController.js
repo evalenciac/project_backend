@@ -7,12 +7,30 @@ const Usuario = require('../models/usuarioModel');
 
 const getUsuarios = async(req, res) => {
 
-    const usuarios = await Usuario.find({}, 'nombre email role google');
+    const desde = Number(req.query.desde) || 0;
+    const limite = Number(req.query.limite) || 0;
+    // Este codigo es similar la que esta lineas abajo, solo que este usa dos promesas una
+    // a continuación de la otra, para evitar esto se utiliza el codigo propuesto
+    // console.log(desde);
+    // console.log(limite);
+    // const usuarios = await Usuario.find({}, 'nombre email role google')
+    //     .skip(desde)
+    //     .limit(limite);
+
+    // const total = await Usuario.count();
+
+    const [usuarios, total] = await Promise.all([
+        Usuario.find({}, 'nombre email role google img').skip(desde).limit(limite),
+        Usuario.countDocuments()
+    ]);
+
+
 
     res.json({
         ok: true,
         msg: 'obtener usuarios',
-        usuarios
+        usuarios,
+        total
 
     });
 }

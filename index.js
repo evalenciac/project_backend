@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 
 
+
 const { dbconection } = require('./database/config'); //no requiere la extension .js
 //Crear el servidor express
 const app = express();
@@ -17,6 +18,8 @@ app.use(cors());
 //Lectura y parseo del body
 app.use(express.json());
 
+
+
 // conexion a base de datos
 dbconection();
 //console.log(process.env);
@@ -26,8 +29,10 @@ dbconection();
 
 app.use('/api/usuarios', require('./routes/usuariosRoute'));
 app.use('/api/login', require('./routes/authRoute'));
-
-
+app.use('/api/proyectos', require('./routes/proyectosRoute'));
+app.use('/api/investigadores', require('./routes/investigadoresRoute'));
+app.use('/api/buscar', require('./routes/busquedasRoute'));
+app.use('/api/upload', require('./routes/uploadsRoute'));
 
 
 

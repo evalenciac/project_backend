@@ -1,5 +1,7 @@
 /*
     Ruta: /api/usuarios
+    tambien se puede utilizar paginacion
+    http://localhost:3000/api/usuarios?desde=10&&limite=5
 */
 const { Router } = require('express');
 const { check } = require('express-validator');
