@@ -24,10 +24,15 @@ router.post('/', [
     ],
     crearInvestigador);
 
-router.put('/:id', [],
+router.put('/:id', [
+        validarJWT,
+        check('nombre', 'El nombre del investigador es obligatorio').not().isEmpty(),
+        check('proyecto', 'El id del proyecto debe ser valido').isMongoId(),
+        validarCampos
+    ],
     actualizarInvestigador);
 
-router.delete('/:id', eliminarInvestigador);
+router.delete('/:id', validarJWT, eliminarInvestigador);
 
 
 

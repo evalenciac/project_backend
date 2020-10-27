@@ -23,10 +23,16 @@ router.post('/', [
     ],
     crearProyecto);
 
-router.put('/:id', [],
+router.put('/:id', [
+        validarJWT,
+        check('nombre', 'El nombre del proyecto es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
     actualizarProyecto);
 
-router.delete('/:id', eliminarProyecto);
+router.delete('/:id',
+    validarJWT,
+    eliminarProyecto);
 
 
 
